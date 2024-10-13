@@ -47,7 +47,7 @@ Before running the application, ensure you have the following installed:
 ### Installation
 1. **Clone the repository**
     ```bash
-    git clone https://github.com/your-username/trips-travel-planner.git
+    git clone https://github.com/your-username/TripWithMe.git
     ```
 2. **Go to the project directory and install dependencies for both the client and server**
     ```bash
