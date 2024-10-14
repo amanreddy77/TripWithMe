@@ -1,6 +1,5 @@
-// bookingController.js
-
 import Booking from "../models/Booking.js";
+import sendEmailNotification from '../utils/sendEmailNotification.js'; // EmailJS utility
 
 const createBooking = async (req, res) => {
   try {
@@ -29,6 +28,9 @@ const createBooking = async (req, res) => {
         .json({ message: "All booking details are required" });
     }
 
+    // Check if any other booking exists on the same date
+    const existingBookings = await Booking.find({ date });
+    
     // Create a new booking
     const newBooking = new Booking({
       userId,
@@ -40,6 +42,11 @@ const createBooking = async (req, res) => {
       maxGroupSize,
     });
     await newBooking.save();
+
+    // If there's an existing booking on the same date, trigger an email notification
+    if (existingBookings.length > 0) {
+      await sendEmailNotification(existingBookings, newBooking);
+    }
 
     res.status(201).json({
       success: true,
