@@ -6,7 +6,7 @@ const bookingSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
-      required: true,
+      required: false,
     },
     fullName: {
       type: String,
@@ -31,6 +31,10 @@ const bookingSchema = new mongoose.Schema(
     date: {
       type: String,
       required: true,
+    },
+    email: {
+      type: String,
+      required: false,
     },
     updatedAt: {
       type: Date,
